@@ -16,4 +16,9 @@ $ heroku git:remote -a <<your-app-name>>
 $ git push heroku master
 ```
 5. Run in terminal `sh reload.sh` - this script will reload heroku app each 30s, so you will get new IP address each 30 seconds.
-6. In order to change destination, please change in the code `https://www.tinkoff.ru/` to any other destination.
+6. In order to change destination, please change in the code `https://www.tinkoff.ru/` to any other destination and redeploy app: 
+```
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+```
