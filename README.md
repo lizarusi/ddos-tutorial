@@ -23,9 +23,26 @@ $ git push heroku master
 7. In order to change destination, please change in the code (`index.js` file) `https://www.tinkoff.ru/` to any other destination and redeploy app: 
 ```
 $ git add .
-$ git commit -am "make it better"
+$ git commit -m "make it better"
 $ git push heroku master
 ```
 If you want to see logs from your app: 
 ```
 $ heroku logs -t -a <<your-app-name>>
+```
+## Multi app DDOS
+
+If you want, you can create more than 1 application with free account in order to generate more load. To do so, you need: 
+1. Create more applications in heroku UI
+2. Push code to newly created app: 
+```
+$ git remote rename heroku heroku-<<n>>  ## Where n is number of the app
+$ heroku git:remote -a <<your-app-name-2>>
+$ git push heroku master  ## This now will push your code to new app
+```
+Also notice that first previous app will be available for pushes under name `heroku-<<n>>`. Also notice that `heroku-<<n>>` should be uniq per origin, so n should be incremental.
+3. Change `reload.sh` file and add after line `heroku restart -a <<your-app-name>>` similar line with `heroku restart -a <<your-app-name-2>>`
+4. Restart sh script. 
+
+You can repeat this untill you will reach maximum amount of dynos per account. 
+After, you will need to pay in order to get more apps. 
