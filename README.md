@@ -20,7 +20,7 @@ $ git commit -am "make it better"
 $ git push heroku master
 ```
 6. Run in terminal `sh reload.sh` - this script will reload heroku app each 30s, so you will get new IP address each 30 seconds.
-7. In order to change destination, please change in the code `https://www.tinkoff.ru/` to any other destination and redeploy app: 
+7. In order to change destination, please change in the code (`index.js` file) `https://www.tinkoff.ru/` to any other destination and redeploy app: 
 ```
 $ git add .
 $ git commit -am "make it better"
