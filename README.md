@@ -33,14 +33,21 @@ $ heroku logs -t -a <<your-app-name>>
 ## Multi app DDOS
 
 If you want, you can create more than 1 application with free account in order to generate more load. To do so, you need: 
-1. Create more applications in heroku UI
+1. Create one more application in heroku UI
 2. Push code to newly created app: 
 ```
-$ git remote rename heroku heroku-<<n>>  ## Where n is number of the app
-$ heroku git:remote -a <<your-app-name-2>>
+$ git remote rename heroku heroku-<<n>>  ## This command will rename current origin under name `heroku` to `heroku-<<n>>. Where n is number of the previous app
+$ heroku git:remote -a <<your-app-name-2>> ## This command set new app origin to name `heroku`.
 $ git push heroku master  ## This now will push your code to new app
 ```
-Also notice that first previous app will be available for pushes under name `heroku-<<n>>`. Also notice that `heroku-<<n>>` should be uniq per origin, so n should be incremental.
+Notice that first app will be available for pushes under name `heroku-<<n>>` and newly created under `heroku`. As well `heroku-<<n>>` should be uniq per origin, so n should be incremental.
+
+Push example for 2 apps: 
+```
+$ git push heroku-1 master ## Pushes new code to <<your-app-name>>
+$ git push heroku master ## Pushes new code to <<your-app-name-2>>
+```
+
 3. Change `reload.sh` file and add after line `heroku restart -a <<your-app-name>>` similar line with `heroku restart -a <<your-app-name-2>>`
 4. Restart sh script. 
 
