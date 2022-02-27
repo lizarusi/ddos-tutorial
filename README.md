@@ -26,3 +26,6 @@ $ git add .
 $ git commit -am "make it better"
 $ git push heroku master
 ```
+If you want to see logs from your app: 
+```
+$ heroku logs -t -a <<your-app-name>>
